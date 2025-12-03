@@ -8,17 +8,17 @@ class PowerPlantNN(nn.Module):
         layers = []
         in_dim = input_dim
         
-        # Dynamically build layers based on the list provided
+        
         for h_dim in hidden_layers:
             layers.append(nn.Linear(in_dim, h_dim))
             layers.append(nn.ReLU()) # Activation function
             in_dim = h_dim
             
-        # Final output layer (1 output for Energy Prediction)
-        layers.append(nn.Linear(in_dim, 1))
+        
+        layers.append(nn.Linear(in_dim, 1)) # Final output layer (1 output for Energy Prediction)
         
         self.network = nn.Sequential(*layers)
-        self.criterion = nn.MSELoss() # Neural Nets typically use MSE
+        self.criterion = nn.MSELoss() 
 
     def forward(self, x):
         return self.network(x)

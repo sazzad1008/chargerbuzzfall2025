@@ -10,7 +10,7 @@ class CauchyRegression(nn.Module):
     def __init__(self, input_dim=4, c=1.0):
         super(CauchyRegression, self).__init__()
         # Linear layer: y = w0 + w1*x1 + w2*x2 + w3*x3 + w4*x4
-        # Note: nn.Linear adds the bias (w0) automatically
+       
         self.linear = nn.Linear(input_dim, 1)
         self.c = c  # The scale parameter for Cauchy loss
         
@@ -26,10 +26,8 @@ class CauchyRegression(nn.Module):
         return torch.mean(loss)
 
     def fit(self, X_train, y_train, epochs=1000, lr=0.01):
-        """
-        Train the model using PyTorch Gradient Descent.
-        """
-        # Convert numpy arrays to tensors if needed
+       
+       
         if not isinstance(X_train, torch.Tensor):
             X_train = torch.tensor(X_train, dtype=torch.float32)
         if not isinstance(y_train, torch.Tensor):
@@ -70,7 +68,7 @@ class CauchyRegression(nn.Module):
     def save_to_onnx(self, filepath="cauchy_model.onnx"):
         """Save the trained model to ONNX format."""
         self.eval()
-        # Create a dummy input matching input_dim (batch_size=1, inputs=4)
+       
         dummy_input = torch.randn(1, self.linear.in_features)
         
         torch.onnx.export(
